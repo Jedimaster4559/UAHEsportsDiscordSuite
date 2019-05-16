@@ -34,11 +34,11 @@ namespace UAHEsportsDiscordSuite.UAHEsportsBot
 
             await RegisterCommandsAsync();
 
-            await _client.LoginAsync(Discord.TokenType.Bot, key.Key);
+            await _client.LoginAsync(Discord.TokenType.Bot, DiscordKeys.GetEsportsKey());
 
             await _client.StartAsync();
 
-            await _client.SetGameAsync("&help");
+            await _client.SetGameAsync("!help");
 
             await Task.Delay(-1);
         }
@@ -67,7 +67,7 @@ namespace UAHEsportsDiscordSuite.UAHEsportsBot
 
             int argPos = 0;
 
-            if (message.HasStringPrefix("&", ref argPos) || message.HasMentionPrefix(_client.CurrentUser, ref argPos))
+            if (message.HasStringPrefix("!", ref argPos) || message.HasMentionPrefix(_client.CurrentUser, ref argPos))
             {
                 var result = await _commands.ExecuteAsync(context, argPos, _services);
 
