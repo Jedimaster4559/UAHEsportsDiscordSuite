@@ -8,7 +8,7 @@ using Discord.Commands;
 
 namespace UAHEsportsDiscordSuite.UAHEsportsBot.Commands
 {
-    class Ping : ModuleBase<SocketCommandContext>
+    public class Ping : ModuleBase<SocketCommandContext>
     {
         [Command("Ping")]
         [Alias("ping")]
