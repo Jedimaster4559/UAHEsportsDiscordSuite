@@ -15,7 +15,7 @@ namespace UAHEsportsDiscordSuite.UAHEsportsBot
 {
     class EsportsBot
     {
-        static void runEsportsBot() => new EsportsBot().RunBotAsync().GetAwaiter().GetResult();
+        public static void runEsportsBot() => new EsportsBot().RunBotAsync().GetAwaiter().GetResult();
 
         private DiscordSocketClient _client;
         private CommandService _commands;
@@ -27,8 +27,6 @@ namespace UAHEsportsDiscordSuite.UAHEsportsBot
             _commands = new CommandService();
 
             _services = new ServiceCollection().AddSingleton(_client).AddSingleton(_commands).BuildServiceProvider();
-
-            PrivateKey key = JsonConvert.DeserializeObject<PrivateKey>(File.ReadAllText("PrivateKey.json"));
 
             _client.Log += Log;
 
