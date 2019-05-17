@@ -51,7 +51,8 @@ namespace UAHEsportsDiscordSuite.RocketLeagueBot
         {
             _client.MessageReceived += HandleCommandAsync;
 
-            await _commands.AddModulesAsync(Assembly.Load(this.GetType().GetTypeInfo().Assembly.GetName()), _services);
+            await _commands.AddModuleAsync<Commands.Ping>(_services);
+            //await _commands.AddModulesAsync(Assembly.Load(this.GetType().GetTypeInfo().Assembly.GetName()), _services);
         }
 
         private async Task HandleCommandAsync(SocketMessage arg)
