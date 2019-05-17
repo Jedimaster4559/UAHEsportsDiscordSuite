@@ -12,7 +12,7 @@ namespace UAHEsportsDiscordSuite.UAHEsportsBot.Commands
     {
         [Command("Ping")]
         [Alias("ping")]
-        public async void ping()
+        public async Task ping()
         {
             int latency = Context.Client.Latency;
 
