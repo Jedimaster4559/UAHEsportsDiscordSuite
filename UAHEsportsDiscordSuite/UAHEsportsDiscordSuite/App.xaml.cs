@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -14,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using System.Threading;
 
 namespace UAHEsportsDiscordSuite
 {
@@ -100,7 +102,18 @@ namespace UAHEsportsDiscordSuite
 
         private void InitializeBots()
         {
+            // TODO: Update and Improve Cancellation handling
+            CancellationTokenSource source = new CancellationTokenSource();
+            CancellationToken cancellationToken = source.Token;
 
+            Task esportsBot = new Task(UAHEsportsBot.EsportsBot.runEsportsBot, cancellationToken);
+            esportsBot.Start();
+
+            Task rocketLeagueBot = new Task(RocketLeagueBot.RocketLeagueBot.runRocketLeagueBot, cancellationToken);
+            rocketLeagueBot.Start();
+
+
+            
         }
     }
 }
