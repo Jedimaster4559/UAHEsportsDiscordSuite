@@ -39,7 +39,7 @@ namespace UAHEsportsDiscordSuite.RocketLeagueBot
 
             _client.Log += Log;
 
-            await SubscribeToEvents();
+            SubscribeToEvents();
 
             await RegisterCommandsAsync();
 

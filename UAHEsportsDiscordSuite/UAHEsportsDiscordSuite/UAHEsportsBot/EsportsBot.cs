@@ -40,7 +40,7 @@ namespace UAHEsportsDiscordSuite.UAHEsportsBot
 
             _client.Log += Log;
 
-            await SubscribeToEvents();
+            SubscribeToEvents();
 
             await RegisterCommandsAsync();
 
