@@ -65,7 +65,7 @@ namespace UAHEsportsDiscordSuite.UAHEsportsBot
             return Task.CompletedTask;
         }
 
-        public async Task SubscribeToEvents()
+        public void SubscribeToEvents()
         {
             _client.MessageReceived += HandleCommandAsync;
 
