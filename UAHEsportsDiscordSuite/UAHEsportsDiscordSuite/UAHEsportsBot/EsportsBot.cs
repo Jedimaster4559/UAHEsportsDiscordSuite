@@ -13,14 +13,24 @@ using Newtonsoft.Json;
 
 namespace UAHEsportsDiscordSuite.UAHEsportsBot
 {
-    class EsportsBot
+    /// <summary>
+    /// A Discord Bot for the UAH Esports Server
+    /// </summary>
+    public class EsportsBot
     {
+        /// <summary>
+        /// Starts a new Rocket League Bot and runs the bot.
+        /// </summary>
         public static void runEsportsBot() => new EsportsBot().RunBotAsync().GetAwaiter().GetResult();
 
         private DiscordSocketClient _client;
         private CommandService _commands;
         private IServiceProvider _services;
 
+        /// <summary>
+        /// Runs the UAH Esports Bot
+        /// </summary>
+        /// <returns></returns>
         public async Task RunBotAsync()
         {
             _client = new DiscordSocketClient();
@@ -41,6 +51,11 @@ namespace UAHEsportsDiscordSuite.UAHEsportsBot
             await Task.Delay(-1);
         }
 
+        /// <summary>
+        /// Log a message to the console
+        /// </summary>
+        /// <param name="arg">The message to log</param>
+        /// <returns></returns>
         private Task Log(LogMessage arg)
         {
             Console.WriteLine(arg);
@@ -48,6 +63,10 @@ namespace UAHEsportsDiscordSuite.UAHEsportsBot
             return Task.CompletedTask;
         }
 
+        /// <summary>
+        /// Subscribe to received messages and register all of the commands
+        /// </summary>
+        /// <returns></returns>
         public async Task RegisterCommandsAsync()
         {
             _client.MessageReceived += HandleCommandAsync;
@@ -56,6 +75,11 @@ namespace UAHEsportsDiscordSuite.UAHEsportsBot
             //await _commands.AddModulesAsync(Assembly.Load(this.GetType().GetTypeInfo().Assembly.GetName()), _services);
         }
 
+        /// <summary>
+        /// Process the comands properly.
+        /// </summary>
+        /// <param name="arg">The message the contains the command</param>
+        /// <returns></returns>
         private async Task HandleCommandAsync(SocketMessage arg)
         {
             var message = arg as SocketUserMessage;
@@ -77,9 +101,5 @@ namespace UAHEsportsDiscordSuite.UAHEsportsBot
             }
         }
 
-        public class PrivateKey
-        {
-            public string Key { get; set; }
-        }
     }
 }

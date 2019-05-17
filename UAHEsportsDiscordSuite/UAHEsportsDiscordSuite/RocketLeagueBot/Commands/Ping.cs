@@ -8,8 +8,15 @@ using Discord.Commands;
 
 namespace UAHEsportsDiscordSuite.RocketLeagueBot.Commands
 {
+    /// <summary>
+    /// Command to get latency. Frequently used by users to test if the bot is working at all.
+    /// </summary>
     public class Ping : ModuleBase<SocketCommandContext>
     {
+        /// <summary>
+        /// Command to get latency. Frequently used by users to test if the bot is working at all.
+        /// </summary>
+        /// <returns></returns>
         [Command("Ping")]
         [Alias("ping")]
         public async Task ping()

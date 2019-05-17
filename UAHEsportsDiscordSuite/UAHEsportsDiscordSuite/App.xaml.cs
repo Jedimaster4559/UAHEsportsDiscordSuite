@@ -100,6 +100,9 @@ namespace UAHEsportsDiscordSuite
             deferral.Complete();
         }
 
+        /// <summary>
+        /// Initializes all of the Discord bots as their own Tasks
+        /// </summary>
         private void InitializeBots()
         {
             // TODO: Update and Improve Cancellation handling
