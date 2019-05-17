@@ -13,8 +13,10 @@ namespace UAHEsportsDiscordSuite
     /// </summary>
     public class DiscordKeys
     {
-        private string EsportsKey { get; }
-        private string RocketLeagueKey { get; }
+        [JsonProperty]
+        private string EsportsKey { get; set; }
+        [JsonProperty]
+        private string RocketLeagueKey { get; set; }
 
         private static DiscordKeys instance = null;
         private static Object padlock = new Object();
