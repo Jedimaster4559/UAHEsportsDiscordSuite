@@ -133,7 +133,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="DiscordKeys.json" />
+    <Content Include="DiscordKeys.json" />
     <None Include="UAHEsportsDiscordSuite_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
