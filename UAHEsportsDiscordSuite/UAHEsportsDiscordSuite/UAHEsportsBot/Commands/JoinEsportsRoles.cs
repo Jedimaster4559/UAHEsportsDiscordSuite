@@ -24,11 +24,13 @@ namespace UAHEsportsDiscordSuite.UAHEsportsBot.Commands
             if (!whiteList.Contains(role.Name))
             {
                 await ReplyAsync($"That role is not availible with that command. Please try a different role.");
+                return;
             }
 
             if (role == null)
             {
                 await ReplyAsync($"{Context.User.Mention} The role could not be found. You have not been added to the role ***{role.Name}***.");
+                return;
             }
 
             IGuildUser user = (IGuildUser)Context.User;
@@ -45,7 +47,7 @@ namespace UAHEsportsDiscordSuite.UAHEsportsBot.Commands
             }
 
             IRole alumni = Utilities.RoleHelper.getRole("Alumni", Context);
-            if (user.RoleIds.Contains(guests.Id))
+            if (user.RoleIds.Contains(alumni.Id))
             {
                 await user.RemoveRoleAsync(students);
             }
