@@ -35,26 +35,39 @@ namespace UAHEsportsDiscordSuite.UAHEsportsBot.Commands
 
             IGuildUser user = (IGuildUser)Context.User;
 
+            await leaveRole();
+
+            await user.AddRoleAsync(Utilities.RoleHelper.getRole(roleName, Context));
+            await ReplyAsync($"{Context.User.Mention} You have successfully been added to the role ***{role.Name}!***");
+
+        }
+
+        [Command("Leave")]
+        [Alias("leave")]
+        public async Task leaveRole()
+        {
+            IGuildUser user = (IGuildUser)Context.User;
+
             IRole students = Utilities.RoleHelper.getRole("Students", Context);
-            if (user.RoleIds.Contains(students.Id)){
+            if (user.RoleIds.Contains(students.Id))
+            {
                 await user.RemoveRoleAsync(students);
+                await ReplyAsync($"{Context.User.Mention} You have been removed from the role ***{students.Name}***.");
             }
 
             IRole guests = Utilities.RoleHelper.getRole("Guests", Context);
             if (user.RoleIds.Contains(guests.Id))
             {
-                await user.RemoveRoleAsync(students);
+                await user.RemoveRoleAsync(guests);
+                await ReplyAsync($"{Context.User.Mention} You have been removed from the role ***{guests.Name}***.");
             }
 
             IRole alumni = Utilities.RoleHelper.getRole("Alumni", Context);
             if (user.RoleIds.Contains(alumni.Id))
             {
-                await user.RemoveRoleAsync(students);
+                await user.RemoveRoleAsync(alumni);
+                await ReplyAsync($"{Context.User.Mention} You have been removed from the role ***{alumni.Name}***.");
             }
-
-            await ((IGuildUser)Context.User).AddRoleAsync(Utilities.RoleHelper.getRole(roleName, Context));
-            await ReplyAsync($"{Context.User.Mention} You have successfully been added to the role ***{role.Name}!***");
-
         }
     }
 }
