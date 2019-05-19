@@ -7,7 +7,7 @@ using Discord;
 using Discord.Commands;
 
 
-namespace VoiceCommands
+namespace UAHEsportsDiscordSuite.Utilities
 {
 
     public class Voice : ModuleBase<SocketCommandContext>
