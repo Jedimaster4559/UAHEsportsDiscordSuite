@@ -81,7 +81,8 @@ namespace UAHEsportsDiscordSuite.UAHEsportsBot
 
             // Add Commands to this by adding a new line with the Class between the <>
             await _commands.AddModuleAsync<Commands.Ping>(_services);
-            await _commands.AddModuleAsync<VoiceCommands.Voice>(_services);
+            await _commands.AddModuleAsync<Utilities.Voice>(_services);
+            await _commands.AddModuleAsync<Commands.JoinEsportsRoles>(_services);
 
         }
 
