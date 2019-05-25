@@ -13,9 +13,9 @@ namespace UAHEsportsDiscordSuite.Utilities
         public List<GuildWhitelist> whitelist { get; set; }
 
         private static VoiceWhitelist instance = null;
-        private static Object padlock = new object();
+        private static Object padlock = new Object();
         
-        private static VoiceWhitelist getInstance()
+        private static VoiceWhitelist GetInstance()
         {
             if(instance == null)
             {
@@ -33,14 +33,13 @@ namespace UAHEsportsDiscordSuite.Utilities
 
         public static bool check(ulong guildId, string vc)
         {
-            getInstance();
-            foreach(GuildWhitelist guild in instance.whitelist)
+            foreach(GuildWhitelist guild in VoiceWhitelist.GetInstance().whitelist)
             {
                 if(guild.guildId == guildId)
                 {
                     foreach(string channel in guild.whitelistChannels)
                     {
-                        if (channel.Equals(Voice.ProcessName(vc)))
+                        if (channel.Equals(Voice.ProcessName(vc).name))
                         {
                             return true;
                         }
