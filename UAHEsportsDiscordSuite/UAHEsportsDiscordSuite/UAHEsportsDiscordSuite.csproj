@@ -125,10 +125,16 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RocketLeagueBot\Commands\Ping.cs" />
-    <Compile Include="Voice\Voice.cs" />
+    <Compile Include="UAHEsportsBot\Commands\Help.cs" />
+    <Compile Include="UAHEsportsBot\Commands\JoinEsportsRoles.cs" />
+    <Compile Include="Utilities\GuildWhitelist.cs" />
+    <Compile Include="Utilities\RoleHelper.cs" />
+    <Compile Include="Utilities\Voice.cs" />
     <Compile Include="RocketLeagueBot\RocketLeagueBot.cs" />
     <Compile Include="UAHEsportsBot\Commands\Ping.cs" />
     <Compile Include="UAHEsportsBot\EsportsBot.cs" />
+    <Compile Include="Utilities\VoiceHelp.cs" />
+    <Compile Include="Utilities\VoiceWhitelist.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -136,6 +142,7 @@
     </AppxManifest>
     <Content Include="DiscordKeys.json" />
     <None Include="UAHEsportsDiscordSuite_TemporaryKey.pfx" />
+    <None Include="VoiceWhitelist.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\Default.rd.xml" />
