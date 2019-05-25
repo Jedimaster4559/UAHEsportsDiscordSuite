@@ -19,6 +19,13 @@ namespace UAHEsportsDiscordSuite.Utilities
             var vc = (user as IVoiceState)?.VoiceChannel;
             if (vc != null)
             { // Make sure the users is actually in a voice channel
+
+                if (!VoiceWhitelist.check(Context.Guild.Id, vc.Name))
+                {
+                    await ReplyAsync($"{Context.User.Mention} That channel is not available through that command");
+                    return;
+                }
+
                 var count = (await vc.GetUsersAsync().FlattenAsync()).Count(); // Get number of users in the current voice channel
                 await vc.ModifyAsync(x =>
                 {
