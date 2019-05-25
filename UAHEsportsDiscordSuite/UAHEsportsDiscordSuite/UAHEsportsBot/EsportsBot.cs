@@ -83,6 +83,7 @@ namespace UAHEsportsDiscordSuite.UAHEsportsBot
             await _commands.AddModuleAsync<Commands.Ping>(_services);
             await _commands.AddModuleAsync<Utilities.Voice>(_services);
             await _commands.AddModuleAsync<Commands.JoinEsportsRoles>(_services);
+            await _commands.AddModuleAsync<Commands.Help>(_services);
 
         }
 
