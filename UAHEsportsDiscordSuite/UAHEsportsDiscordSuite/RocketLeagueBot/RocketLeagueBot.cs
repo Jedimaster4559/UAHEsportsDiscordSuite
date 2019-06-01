@@ -87,6 +87,8 @@ namespace UAHEsportsDiscordSuite.RocketLeagueBot
 
             Services.Ranks.RanksUser user = new Services.Ranks.RanksUser(embed, context);
 
+            await user.parse();
+
             if (!user.getState()) return;
 
             await user.handleRanks();
