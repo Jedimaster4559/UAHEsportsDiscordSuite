@@ -123,6 +123,8 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PermissionSets\BotAdmin.cs" />
+    <Compile Include="PermissionSets\BotOwnerPermissions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RocketLeagueBot\Commands\Ping.cs" />
     <Compile Include="RocketLeagueBot\Services\Ranks\RanksUser.cs" />
@@ -143,9 +145,13 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <Content Include="Assets\UAHEsportsLogo.jpg" />
-    <Content Include="DiscordKeys.json" />
+    <Content Include="DiscordKeys.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="UAHEsportsDiscordSuite_TemporaryKey.pfx" />
-    <None Include="VoiceWhitelist.json" />
+    <Content Include="VoiceWhitelist.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\Default.rd.xml" />
