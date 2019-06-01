@@ -79,18 +79,17 @@ namespace UAHEsportsDiscordSuite.RocketLeagueBot
 
             var context = new SocketCommandContext(_client, message);
 
-            if (message.Content.Equals("rlrank"))
-            {
-                await ((IMessageChannel)_client.GetDMChannelAsync(424398041043435520)).SendMessageAsync("rlrank pc 1947083174");
-            }
-
             if (message is null || !message.Author.Id.Equals(424398041043435520)) return;
 
             Embed embed = null;
 
             if (message.Embeds.Count > 0) embed = message.Embeds.ElementAt(0);
 
-            new UAHEsportsDiscordSuite.RocketLeagueBot.Services.Ranks.RanksUser(embed, context);
+            Services.Ranks.RanksUser user = new Services.Ranks.RanksUser(embed, context);
+
+            if (!user.getState()) return;
+
+            await user.handleRanks();
         }
 
         /// <summary>

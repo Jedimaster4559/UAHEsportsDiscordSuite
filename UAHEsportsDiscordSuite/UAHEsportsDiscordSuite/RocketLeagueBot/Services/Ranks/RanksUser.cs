@@ -14,6 +14,7 @@ namespace UAHEsportsDiscordSuite.RocketLeagueBot.Services.Ranks
         private RocketLeagueRanks? standard = null, doubles = null, duel = null, soloStandard = null;
         private RocketLeagueRanks? hoops = null, rumble = null, dropshot = null, snowDay = null;
         private IGuildUser user = null;
+        private bool parseState = false;
 
         public RanksUser(Embed embed, SocketCommandContext Context)
         {
@@ -29,8 +30,13 @@ namespace UAHEsportsDiscordSuite.RocketLeagueBot.Services.Ranks
 
             } else
             {
-                handleRanks();
+                parseState = true;
             }
+        }
+
+        public bool getState()
+        {
+            return parseState;
         }
 
         private async void processUser(SocketCommandContext Context)
@@ -112,11 +118,11 @@ namespace UAHEsportsDiscordSuite.RocketLeagueBot.Services.Ranks
 
         }
 
-        private async void handleRanks()
+        public async Task handleRanks()
         {
             RocketLeagueRanks rank = getHighestRank();
 
-            removeRoles();
+            removeRanks();
 
             if(rank == RocketLeagueRanks.Unranked)
             {
@@ -171,6 +177,57 @@ namespace UAHEsportsDiscordSuite.RocketLeagueBot.Services.Ranks
             }
 
             return min;
+        }
+
+        private async Task removeRanks()
+        {
+            IRole unranked = Utilities.RoleHelper.getRole("Unranked/New", user.Guild);
+            if (user.RoleIds.Contains(unranked.Id))
+            {
+                await user.RemoveRoleAsync(unranked);
+            }
+
+            IRole bronze = Utilities.RoleHelper.getRole("Bronze", user.Guild);
+            if (user.RoleIds.Contains(bronze.Id))
+            {
+                await user.RemoveRoleAsync(bronze);
+            }
+
+            IRole silver = Utilities.RoleHelper.getRole("Silver", user.Guild);
+            if (user.RoleIds.Contains(silver.Id))
+            {
+                await user.RemoveRoleAsync(silver);
+            }
+
+            IRole gold = Utilities.RoleHelper.getRole("Gold", user.Guild);
+            if (user.RoleIds.Contains(gold.Id))
+            {
+                await user.RemoveRoleAsync(gold);
+            }
+
+            IRole platinum = Utilities.RoleHelper.getRole("Platinum", user.Guild);
+            if (user.RoleIds.Contains(platinum.Id))
+            {
+                await user.RemoveRoleAsync(platinum);
+            }
+
+            IRole diamond = Utilities.RoleHelper.getRole("Diamond", user.Guild);
+            if (user.RoleIds.Contains(diamond.Id))
+            {
+                await user.RemoveRoleAsync(diamond);
+            }
+
+            IRole champ = Utilities.RoleHelper.getRole("Champion", user.Guild);
+            if (user.RoleIds.Contains(champ.Id))
+            {
+                await user.RemoveRoleAsync(champ);
+            }
+
+            IRole grandChamp = Utilities.RoleHelper.getRole("Grand Champion", user.Guild);
+            if (user.RoleIds.Contains(grandChamp.Id))
+            {
+                await user.RemoveRoleAsync(grandChamp);
+            }
         }
     }
 }
