@@ -140,6 +140,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <Content Include="Assets\UAHEsportsLogo.jpg" />
     <Content Include="DiscordKeys.json" />
     <None Include="UAHEsportsDiscordSuite_TemporaryKey.pfx" />
     <None Include="VoiceWhitelist.json" />
