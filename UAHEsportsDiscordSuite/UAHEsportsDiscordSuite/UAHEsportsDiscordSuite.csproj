@@ -126,8 +126,10 @@
     <Compile Include="PermissionSets\BotAdmin.cs" />
     <Compile Include="PermissionSets\BotOwnerPermissions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RocketLeagueBot\Commands\Admin\Ranks\ResetRank.cs" />
     <Compile Include="RocketLeagueBot\Commands\Ping.cs" />
     <Compile Include="RocketLeagueBot\Services\Ranks\RanksUser.cs" />
+    <Compile Include="RocketLeagueBot\Commands\Admin\Ranks\ResetAllUsers.cs" />
     <Compile Include="RocketLeagueBot\Services\Ranks\RocketLeagueRanks.cs" />
     <Compile Include="UAHEsportsBot\Commands\Help.cs" />
     <Compile Include="UAHEsportsBot\Commands\JoinEsportsRoles.cs" />
@@ -184,9 +186,7 @@
       <Version>12.0.2</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="RocketLeagueBot\Commands\Ranks\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

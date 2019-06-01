@@ -188,7 +188,7 @@ namespace UAHEsportsDiscordSuite.RocketLeagueBot.Services.Ranks
             return min;
         }
 
-        private static async Task removeRanks(IGuildUser inputUser)
+        public static async Task removeRanks(IGuildUser inputUser)
         {
 
             IRole unranked = Utilities.RoleHelper.getRole("Unranked/New", inputUser.Guild);
