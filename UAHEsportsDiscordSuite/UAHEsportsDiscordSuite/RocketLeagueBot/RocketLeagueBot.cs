@@ -68,12 +68,12 @@ namespace UAHEsportsDiscordSuite.RocketLeagueBot
         {
             _client.MessageReceived += HandleCommandAsync;
 
-            _client.MessageReceived += TestStatsBot;
+            _client.MessageReceived += HandleRanksAsync;
 
             _client.UserVoiceStateUpdated += UpdateVoiceChannels;
         }
 
-        private async Task TestStatsBot(SocketMessage arg)
+        private async Task HandleRanksAsync(SocketMessage arg)
         {
             var message = arg as SocketUserMessage;
 
@@ -90,7 +90,7 @@ namespace UAHEsportsDiscordSuite.RocketLeagueBot
 
             if (message.Embeds.Count > 0) embed = message.Embeds.ElementAt(0);
 
-            await ((IMessageChannel)_client.GetChannel(579020052473446411)).SendMessageAsync(message.Content, message.IsTTS, embed);
+            new UAHEsportsDiscordSuite.RocketLeagueBot.Services.Ranks.RanksUser(embed, context);
         }
 
         /// <summary>
