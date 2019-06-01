@@ -19,14 +19,19 @@ namespace UAHEsportsDiscordSuite.Utilities
 
         public static IRole getRole(string roleName, SocketCommandContext Context)
         {
-            var roles = Context.Guild.Roles;
+            return getRole(roleName, Context.Guild);
+        }
+
+        public static IRole getRole(string roleName, IGuild guild)
+        {
+            var roles = guild.Roles;
             roleName = roleName.ToLower();
 
             IRole returnRole = null;
 
-            foreach(IRole role in roles)
+            foreach (IRole role in roles)
             {
-                if(role.Name.ToLower() == roleName)
+                if (role.Name.ToLower() == roleName)
                 {
                     returnRole = role;
                     break;
