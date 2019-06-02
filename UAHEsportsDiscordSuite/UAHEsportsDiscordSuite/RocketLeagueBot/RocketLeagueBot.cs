@@ -71,6 +71,26 @@ namespace UAHEsportsDiscordSuite.RocketLeagueBot
             _client.MessageReceived += HandleRanksAsync;
 
             _client.UserVoiceStateUpdated += UpdateVoiceChannels;
+
+            _client.UserJoined += HandleUserJoined;
+        }
+
+        private async Task HandleUserJoined(SocketGuildUser arg)
+        {
+            IMessageChannel channel = _client.GetChannel(562404720170500188) as IMessageChannel;
+
+            await channel.SendMessageAsync($"Welcome to the UAH Rocket League Server {arg.Mention}");
+
+            if (arg.IsBot) return;
+
+            IDMChannel dm = await arg.GetOrCreateDMChannelAsync();
+
+            await dm.SendMessageAsync("Welcome to the UAH Rocket League Server! To have your rank added in the server, type the command `rlrank <platform> <account>` in the bot commands channel on the server!");
+
+            IGuildUser user = arg as IGuildUser;
+
+            await user.AddRoleAsync(Utilities.RoleHelper.getRole("Unranked/New", user.Guild));
+
         }
 
         private async Task HandleRanksAsync(SocketMessage arg)
