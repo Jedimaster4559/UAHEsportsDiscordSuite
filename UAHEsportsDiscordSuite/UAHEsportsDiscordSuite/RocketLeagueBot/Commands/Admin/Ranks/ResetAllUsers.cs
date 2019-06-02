@@ -26,7 +26,7 @@ namespace UAHEsportsDiscordSuite.RocketLeagueBot.Commands.Admin.Ranks
 
             foreach(SocketGuildUser user in users)
             {
-                await Services.Ranks.RanksUser.removeRanks(user as IGuildUser);
+                await ResetRank.resetUser(user as IGuildUser);
                 count++;
                 await progressMessage.ModifyAsync(x =>
                 {
@@ -52,15 +52,15 @@ namespace UAHEsportsDiscordSuite.RocketLeagueBot.Commands.Admin.Ranks
             }
             else
             {
-                message += "Rank Reset has been completed";
+                message += "Rank Reset has been completed\n";
             }
 
             message += "Status: " + Math.Round(percentage * 100, 2).ToString() + "%\n";
-            message += "[";
+            message += "```ini\n[";
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 25; i++)
             {
-                if (Math.Floor(percentage * 10) >= i + 1)
+                if (Math.Floor(percentage * 25) >= i + 1)
                 {
                     message += "X";
                 }
@@ -70,7 +70,7 @@ namespace UAHEsportsDiscordSuite.RocketLeagueBot.Commands.Admin.Ranks
                 }
             }
 
-            message += "]";
+            message += "]```";
 
             return message;
         }
