@@ -106,6 +106,7 @@ namespace UAHEsportsDiscordSuite.RocketLeagueBot
             await _commands.AddModuleAsync<Utilities.VoiceHelp>(_services);
             await _commands.AddModuleAsync<Commands.Admin.Ranks.ResetAllUsers>(_services);
             await _commands.AddModuleAsync<Commands.Admin.Ranks.ResetRank>(_services);
+            await _commands.AddModuleAsync<Commands.Admin.Help>(_services);
 
         }
 

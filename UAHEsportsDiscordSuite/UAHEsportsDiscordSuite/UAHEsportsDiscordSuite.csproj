@@ -126,6 +126,7 @@
     <Compile Include="PermissionSets\BotAdmin.cs" />
     <Compile Include="PermissionSets\BotOwnerPermissions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RocketLeagueBot\Commands\Admin\Help.cs" />
     <Compile Include="RocketLeagueBot\Commands\Admin\Ranks\ResetRank.cs" />
     <Compile Include="RocketLeagueBot\Commands\Ping.cs" />
     <Compile Include="RocketLeagueBot\Services\Ranks\RanksUser.cs" />
