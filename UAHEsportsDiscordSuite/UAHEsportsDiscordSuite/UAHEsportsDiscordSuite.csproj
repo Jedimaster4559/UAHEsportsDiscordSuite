@@ -123,19 +123,38 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PermissionSets\BotAdmin.cs" />
+    <Compile Include="PermissionSets\BotOwnerPermissions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RocketLeagueBot\Commands\Admin\Help.cs" />
+    <Compile Include="RocketLeagueBot\Commands\Admin\Ranks\ResetRank.cs" />
     <Compile Include="RocketLeagueBot\Commands\Ping.cs" />
-    <Compile Include="Voice\Voice.cs" />
+    <Compile Include="RocketLeagueBot\Services\Ranks\RanksUser.cs" />
+    <Compile Include="RocketLeagueBot\Commands\Admin\Ranks\ResetAllUsers.cs" />
+    <Compile Include="RocketLeagueBot\Services\Ranks\RocketLeagueRanks.cs" />
+    <Compile Include="UAHEsportsBot\Commands\Help.cs" />
+    <Compile Include="UAHEsportsBot\Commands\JoinEsportsRoles.cs" />
+    <Compile Include="Utilities\GuildWhitelist.cs" />
+    <Compile Include="Utilities\RoleHelper.cs" />
+    <Compile Include="Utilities\Voice.cs" />
     <Compile Include="RocketLeagueBot\RocketLeagueBot.cs" />
     <Compile Include="UAHEsportsBot\Commands\Ping.cs" />
     <Compile Include="UAHEsportsBot\EsportsBot.cs" />
+    <Compile Include="Utilities\VoiceHelp.cs" />
+    <Compile Include="Utilities\VoiceWhitelist.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <Content Include="DiscordKeys.json" />
+    <Content Include="Assets\UAHEsportsLogo.jpg" />
+    <Content Include="DiscordKeys.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="UAHEsportsDiscordSuite_TemporaryKey.pfx" />
+    <Content Include="VoiceWhitelist.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\Default.rd.xml" />

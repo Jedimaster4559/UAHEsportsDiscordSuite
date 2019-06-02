@@ -39,7 +39,7 @@ namespace UAHEsportsDiscordSuite.RocketLeagueBot
 
             _client.Log += Log;
 
-            await SubscribeToEvents();
+            SubscribeToEvents();
 
             await RegisterCommandsAsync();
 
@@ -68,7 +68,50 @@ namespace UAHEsportsDiscordSuite.RocketLeagueBot
         {
             _client.MessageReceived += HandleCommandAsync;
 
+            _client.MessageReceived += HandleRanksAsync;
+
             _client.UserVoiceStateUpdated += UpdateVoiceChannels;
+
+            _client.UserJoined += HandleUserJoined;
+        }
+
+        private async Task HandleUserJoined(SocketGuildUser arg)
+        {
+            IMessageChannel channel = _client.GetChannel(562404720170500188) as IMessageChannel;
+
+            await channel.SendMessageAsync($"Welcome to the UAH Rocket League Server {arg.Mention}");
+
+            if (arg.IsBot) return;
+
+            IDMChannel dm = await arg.GetOrCreateDMChannelAsync();
+
+            await dm.SendMessageAsync("Welcome to the UAH Rocket League Server! To have your rank added in the server, type the command `rlrank <platform> <account>` in the bot commands channel on the server!");
+
+            IGuildUser user = arg as IGuildUser;
+
+            await user.AddRoleAsync(Utilities.RoleHelper.getRole("Unranked/New", user.Guild));
+
+        }
+
+        private async Task HandleRanksAsync(SocketMessage arg)
+        {
+            var message = arg as SocketUserMessage;
+
+            var context = new SocketCommandContext(_client, message);
+
+            if (message is null || !message.Author.Id.Equals(424398041043435520)) return;
+
+            Embed embed = null;
+
+            if (message.Embeds.Count > 0) embed = message.Embeds.ElementAt(0);
+
+            Services.Ranks.RanksUser user = new Services.Ranks.RanksUser(embed, context);
+
+            await user.parse();
+
+            if (!user.getState()) return;
+
+            await user.handleRanks();
         }
 
         /// <summary>
@@ -79,7 +122,11 @@ namespace UAHEsportsDiscordSuite.RocketLeagueBot
         {
             // Add Commands to this by adding a new line with the Class between the <>
             await _commands.AddModuleAsync<Commands.Ping>(_services);
-            await _commands.AddModuleAsync<VoiceCommands.Voice>(_services);
+            await _commands.AddModuleAsync<Utilities.Voice>(_services);
+            await _commands.AddModuleAsync<Utilities.VoiceHelp>(_services);
+            await _commands.AddModuleAsync<Commands.Admin.Ranks.ResetAllUsers>(_services);
+            await _commands.AddModuleAsync<Commands.Admin.Ranks.ResetRank>(_services);
+            await _commands.AddModuleAsync<Commands.Admin.Help>(_services);
 
         }
 
@@ -111,14 +158,13 @@ namespace UAHEsportsDiscordSuite.RocketLeagueBot
 
         private static async Task UpdateVoiceChannels(SocketUser su, SocketVoiceState oldState, SocketVoiceState newState)
         {
-            string[] whitelist = { "General", "Gaming", "Chillin'" }; // List of channels not to modify
             if (newState.VoiceChannel == oldState.VoiceChannel) return; // The event can be triggered without changing channels
 
             // Handle joining a channel
-            if (newState.VoiceChannel != null && whitelist.Contains(VoiceCommands.Voice.ProcessName(newState.VoiceChannel.Name).name)) // Check to see if a channel was joined and that channel is not in the blacklist
+            if (newState.VoiceChannel != null && Utilities.VoiceWhitelist.check(newState.VoiceChannel.Guild.Id, newState.VoiceChannel.Name)) // Check to see if a channel was joined and that channel is not in the blacklist
             {
                 IGuildChannel vc = newState.VoiceChannel; // 
-                var vct = VoiceCommands.Voice.ProcessName(vc.Name);
+                var vct = Utilities.Voice.ProcessName(vc.Name);
                 Console.WriteLine($"{su.Username}#{su.Discriminator} has joined {vc.Name}({vc.Id})");
 
                 var users = (await vc.GetUsersAsync().FlattenAsync()).ToList();
@@ -131,7 +177,7 @@ namespace UAHEsportsDiscordSuite.RocketLeagueBot
                     var vcso = vcs.OrderBy(item => item.Position); // Order the list of voice channels
                     foreach (var channel in vcso) // Loop over every channel
                     {
-                        var chnl = VoiceCommands.Voice.ProcessName(channel.Name); // Get the name and number from the channel
+                        var chnl = Utilities.Voice.ProcessName(channel.Name); // Get the name and number from the channel
                         if (chnl.name != vct.name) continue; // Check to see if the channel is of the same type
                         pos = Math.Max(channel.Position, pos); // If the channel is lower, save the new position
                         if (chnl.number != number)
@@ -162,10 +208,10 @@ namespace UAHEsportsDiscordSuite.RocketLeagueBot
             }
 
             // Handle leaving a channel
-            if (oldState.VoiceChannel != null && whitelist.Contains(VoiceCommands.Voice.ProcessName(oldState.VoiceChannel.Name).name))
+            if (oldState.VoiceChannel != null && Utilities.VoiceWhitelist.check(oldState.VoiceChannel.Guild.Id, oldState.VoiceChannel.Name))
             {
                 IGuildChannel vc = oldState.VoiceChannel;
-                var vct = VoiceCommands.Voice.ProcessName(vc.Name);
+                var vct = Utilities.Voice.ProcessName(vc.Name);
                 Console.WriteLine($"{su.Username}#{su.Discriminator} has left {vc.Name}({vc.Id})");
 
                 var users = (await vc.GetUsersAsync().FlattenAsync()).ToList();
@@ -182,7 +228,7 @@ namespace UAHEsportsDiscordSuite.RocketLeagueBot
                     // This functions almost identically to the number adjustment in the join
                     foreach (var channel in vcso)
                     {
-                        var chnl = VoiceCommands.Voice.ProcessName(channel.Name);
+                        var chnl = Utilities.Voice.ProcessName(channel.Name);
                         if (chnl.name != vct.name) continue;
                         if (chnl.number == vct.number) continue; // Because the deleted channel is still in the list, skip it
                         if (chnl.number != number)

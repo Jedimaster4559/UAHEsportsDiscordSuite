@@ -26,5 +26,10 @@ namespace UAHEsportsDiscordSuite
         {
             this.InitializeComponent();
         }
+
+        private void EsportsButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
