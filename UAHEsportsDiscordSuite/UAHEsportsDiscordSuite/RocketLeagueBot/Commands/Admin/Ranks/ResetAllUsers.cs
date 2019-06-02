@@ -26,7 +26,11 @@ namespace UAHEsportsDiscordSuite.RocketLeagueBot.Commands.Admin.Ranks
 
             foreach(SocketGuildUser user in users)
             {
-                await ResetRank.resetUser(user as IGuildUser);
+                if (!user.IsBot)
+                {
+                    await ResetRank.resetUser(user as IGuildUser);
+                }
+
                 count++;
                 await progressMessage.ModifyAsync(x =>
                 {
