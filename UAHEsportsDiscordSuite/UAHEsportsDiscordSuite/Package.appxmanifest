@@ -9,7 +9,7 @@
   <Identity
     Name="a6171f9d-9922-4f67-8897-bc0b3d6482f8"
     Publisher="CN=nbsol"
-    Version="1.0.0.0" />
+    Version="0.1.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="a6171f9d-9922-4f67-8897-bc0b3d6482f8" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
