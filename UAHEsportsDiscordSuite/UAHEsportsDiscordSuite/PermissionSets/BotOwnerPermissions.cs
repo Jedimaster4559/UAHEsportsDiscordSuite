@@ -15,6 +15,7 @@ namespace UAHEsportsDiscordSuite.PermissionSets
             if (context.User.Id == 320286709063614467)
                 return PreconditionResult.FromSuccess();
             else
+                await context.Channel.SendMessageAsync("You must be the owner of this bot to run that command");
                 return PreconditionResult.FromError("You must be the bot owner to run this command");
         }
     }
