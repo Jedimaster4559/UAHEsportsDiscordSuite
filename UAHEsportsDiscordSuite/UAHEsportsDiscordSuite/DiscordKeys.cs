@@ -20,6 +20,7 @@ namespace UAHEsportsDiscordSuite
 
         private static DiscordKeys instance = null;
         private static Object padlock = new Object();
+        private static string keysFile = "DiscordKeysBeta.json";
 
         /// <summary>
         /// Gets the discord Keys object. This includes deserialization from 
@@ -33,7 +34,7 @@ namespace UAHEsportsDiscordSuite
                 {
                     if(instance == null)
                     {
-                        instance = JsonConvert.DeserializeObject<DiscordKeys>(File.ReadAllText("DiscordKeys.json"));
+                        instance = JsonConvert.DeserializeObject<DiscordKeys>(File.ReadAllText(keysFile));
                     }
                 }
             }
