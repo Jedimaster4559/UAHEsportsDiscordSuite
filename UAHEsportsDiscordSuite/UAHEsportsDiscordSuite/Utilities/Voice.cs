@@ -22,7 +22,7 @@ namespace UAHEsportsDiscordSuite.Utilities
 
                 if (!VoiceWhitelist.check(Context.Guild.Id, vc.Name))
                 {
-                    await ReplyAsync($"{Context.User.Mention} That channel is not available through that command");
+                    await Context.Channel.SendMessageAsync($"{Context.User.Mention} That channel is not available through that command");
                     return;
                 }
 

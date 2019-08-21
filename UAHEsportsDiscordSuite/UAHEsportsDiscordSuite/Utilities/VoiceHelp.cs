@@ -18,6 +18,8 @@ namespace UAHEsportsDiscordSuite.Utilities
         {
             EmbedBuilder embed = new EmbedBuilder();
             embed.WithTitle("Voice Lock Help");
+            embed.WithColor(Color.Blue);
+            embed.WithThumbnailUrl(Context.Client.CurrentUser.GetAvatarUrl());
 
             EmbedFieldBuilder function = new EmbedFieldBuilder();
             function.WithName("Function:");
@@ -26,6 +28,9 @@ namespace UAHEsportsDiscordSuite.Utilities
             EmbedFieldBuilder usage = new EmbedFieldBuilder();
             usage.WithName("Usage:");
             usage.WithValue("!lock");
+
+            embed.AddField(function);
+            embed.AddField(usage);
 
             await ReplyAsync("", false, embed.Build());
         }
@@ -36,6 +41,8 @@ namespace UAHEsportsDiscordSuite.Utilities
         {
             EmbedBuilder embed = new EmbedBuilder();
             embed.WithTitle("Voice Unlock Help");
+            embed.WithColor(Color.Blue);
+            embed.WithThumbnailUrl(Context.Client.CurrentUser.GetAvatarUrl());
 
             EmbedFieldBuilder function = new EmbedFieldBuilder();
             function.WithName("Function:");
@@ -44,6 +51,9 @@ namespace UAHEsportsDiscordSuite.Utilities
             EmbedFieldBuilder usage = new EmbedFieldBuilder();
             usage.WithName("Usage:");
             usage.WithValue("!unlock");
+
+            embed.AddField(function);
+            embed.AddField(usage);
 
             await ReplyAsync("", false, embed.Build());
         }
