@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -54,6 +55,23 @@ namespace UAHEsportsDiscordSuite
             app.UseCookiePolicy();
 
             app.UseMvc();
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.All
+            });
+
+            // Patch path base with forwarded path
+            app.Use(async (context, next) =>
+            {
+                var forwardedPath = context.Request.Headers["X-Forwarded-Path"].FirstOrDefault();
+                if (!string.IsNullOrEmpty(forwardedPath))
+                {
+                    context.Request.PathBase = forwardedPath;
+                }
+
+                await next();
+            });
         }
     }
 }
