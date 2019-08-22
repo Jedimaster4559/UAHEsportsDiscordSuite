@@ -29,5 +29,15 @@ namespace UAHEsportsDiscordSuite.UAHEsportsBot.BotUserControls
             
             await ReplyAsync($"{Context.User.Mention} Your reaction has been added!");
         }
+
+        [Command("Clear")]
+        [Alias("clear")]
+        public async Task clear(ulong messageID)
+        {
+            IUserMessage message = await Context.Channel.GetMessageAsync(messageID) as IUserMessage;
+
+            await message.RemoveAllReactionsAsync();
+            await ReplyAsync($"{Context.User.Mention} All reactions have been removed!");
+        }
     }
 }
