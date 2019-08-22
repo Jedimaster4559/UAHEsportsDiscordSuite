@@ -70,7 +70,13 @@ namespace UAHEsportsDiscordSuite.UAHEsportsBot
             _client.MessageReceived += HandleCommandAsync;
 
             _client.UserVoiceStateUpdated += UpdateVoiceChannels;
+
+            _client.ReactionAdded += Services.MainEsportsRoles.HandleRoleSelection;
+
+            _client.ReactionRemoved += Services.MainEsportsRoles.RemoveRoleSelection;
         }
+
+
 
         /// <summary>
         /// Subscribe to received messages and register all of the commands
