@@ -20,7 +20,7 @@ namespace UAHEsportsDiscordSuite
 
         private static DiscordKeys instance = null;
         private static Object padlock = new Object();
-        private static string keysFile = "DiscordKeysBeta.json";
+        private static string keysFile = "DiscordKeys.json";
 
         /// <summary>
         /// Gets the discord Keys object. This includes deserialization from 

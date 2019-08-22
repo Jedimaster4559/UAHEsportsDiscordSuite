@@ -10,14 +10,15 @@ namespace UAHEsportsDiscordSuite.UAHEsportsBot.Services
 {
     public static class MainEsportsRoles
     {
-        private static ulong messageID = 613933958899564563;
+        private static ulong messageId = 613933958899564563;
+        private static IEmote studentEmote = Emote.Parse("<:discordimage:597786037367996417>");
+        private static IEmote alumniEmote = new Emoji("👴");
+        private static IEmote guestEmote = new Emoji("😎");
 
         public async static Task HandleRoleSelection(Cacheable<IUserMessage, ulong> arg1, ISocketMessageChannel arg2, SocketReaction arg3)
         {
-            
-            IUserMessage message = await arg1.DownloadAsync();
 
-            if(message.Id != messageID)
+            if(messageId != arg1.Id)
             {
                 return;
             }
@@ -27,21 +28,21 @@ namespace UAHEsportsDiscordSuite.UAHEsportsBot.Services
             await HandleLeaveAll(user);
 
             IRole students = Utilities.RoleHelper.getRole("Students", user.Guild);
-            if (arg3.Emote.Name.Equals(":discordimage:"))
+            if (arg3.Emote.Equals(studentEmote))
             {
                 await user.AddRoleAsync(students);
                 await user.GetOrCreateDMChannelAsync().Result.SendMessageAsync(($"{user.Mention} You have been to the role ***{students.Name}***."));
             }
 
             IRole alumni = Utilities.RoleHelper.getRole("Alumni", user.Guild);
-            if (arg3.Emote.Name.Equals(":older_man:"))
+            if (arg3.Emote.Equals(alumniEmote))
             {
                 await user.AddRoleAsync(Utilities.RoleHelper.getRole("Alumni", user.Guild));
                 await user.GetOrCreateDMChannelAsync().Result.SendMessageAsync(($"{user.Mention} You have been removed from the role ***{alumni.Name}***."));
             }
 
             IRole guests = Utilities.RoleHelper.getRole("Guests", user.Guild);
-            if (arg3.Emote.Name.Equals(":sunglasses:")) //placeholder text
+            if (arg3.Emote.Equals(guestEmote)) //placeholder text
             {
                 await user.AddRoleAsync(guests);
                 await user.GetOrCreateDMChannelAsync().Result.SendMessageAsync(($"{user.Mention} You have been removed from the role ***{guests.Name}***."));
@@ -55,21 +56,21 @@ namespace UAHEsportsDiscordSuite.UAHEsportsBot.Services
             if (user.RoleIds.Contains(students.Id))
             {
                 await user.RemoveRoleAsync(students);
-                await user.GetOrCreateDMChannelAsync().Result.SendMessageAsync(($"{user.Mention} You have been removed from the role ***{students.Name}***."));
+                await user.GetOrCreateDMChannelAsync().Result.SendMessageAsync(($"{user.Mention} You have been removed from the role ***{students.Name}***. Remember to remove your reaction for that role if you have not already!"));
             }
 
             IRole guests = Utilities.RoleHelper.getRole("Guests", user.Guild);
             if (user.RoleIds.Contains(guests.Id))
             {
                 await user.RemoveRoleAsync(guests);
-                await user.GetOrCreateDMChannelAsync().Result.SendMessageAsync(($"{user.Mention} You have been removed from the role ***{guests.Name}***."));
+                await user.GetOrCreateDMChannelAsync().Result.SendMessageAsync(($"{user.Mention} You have been removed from the role ***{guests.Name}***. Remember to remove your reaction for that role if you have not already!"));
             }
 
             IRole alumni = Utilities.RoleHelper.getRole("Alumni", user.Guild);
             if (user.RoleIds.Contains(alumni.Id))
             {
                 await user.RemoveRoleAsync(alumni);
-                await user.GetOrCreateDMChannelAsync().Result.SendMessageAsync(($"{user.Mention} You have been removed from the role ***{alumni.Name}***."));
+                await user.GetOrCreateDMChannelAsync().Result.SendMessageAsync(($"{user.Mention} You have been removed from the role ***{alumni.Name}***. Remember to remove your reaction for that role if you have not already!"));
             }
         }
 
@@ -77,7 +78,7 @@ namespace UAHEsportsDiscordSuite.UAHEsportsBot.Services
         {
             IUserMessage message = await arg1.DownloadAsync();
 
-            if (message.Id != messageID)
+            if (messageId != arg1.Id)
             {
                 return;
             }
@@ -86,21 +87,21 @@ namespace UAHEsportsDiscordSuite.UAHEsportsBot.Services
             IGuildUser user = (IGuildUser)arg3.User.Value;
 
             IRole students = Utilities.RoleHelper.getRole("Students", user.Guild);
-            if (arg3.Emote.Name.Equals(":discordimage:"))
+            if (arg3.Emote.Equals(studentEmote))
             {
                 await user.RemoveRoleAsync(students);
                 await user.GetOrCreateDMChannelAsync().Result.SendMessageAsync(($"{user.Mention} You have been removed from the role ***{students.Name}***."));
             }
 
             IRole guests = Utilities.RoleHelper.getRole("Guests", user.Guild);
-            if (arg3.Emote.Name.Equals(":older_man:"))
+            if (arg3.Emote.Equals(guestEmote))
             {
                 await user.RemoveRoleAsync(guests);
                 await user.GetOrCreateDMChannelAsync().Result.SendMessageAsync(($"{user.Mention} You have been removed from the role ***{guests.Name}***."));
             }
 
             IRole alumni = Utilities.RoleHelper.getRole("Alumni", user.Guild);
-            if (arg3.Emote.Name.Equals(":sunglasses:")) //Placeholder
+            if (arg3.Emote.Equals(alumniEmote)) //Placeholder
             {
                 await user.RemoveRoleAsync(alumni);
                 await user.GetOrCreateDMChannelAsync().Result.SendMessageAsync(($"{user.Mention} You have been removed from the role ***{alumni.Name}***."));

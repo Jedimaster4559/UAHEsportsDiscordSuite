@@ -14,10 +14,19 @@ namespace UAHEsportsDiscordSuite.UAHEsportsBot.BotUserControls
     {
         [Command("Add")]
         [Alias("add")]
-        public async void add(ulong messageID, IEmote emoji)
+        public async Task add(ulong messageID, [Remainder]String emoji)
         {
             IUserMessage message = await Context.Channel.GetMessageAsync(messageID) as IUserMessage;
-            await message.AddReactionAsync(emoji);
+            try
+            {
+                var emote = Emote.Parse(emoji);
+                await message.AddReactionAsync(emote);
+            } catch (System.ArgumentException e)
+            {
+                var actualEmoji = new Emoji(emoji);
+                await message.AddReactionAsync(actualEmoji);
+            }
+            
             await ReplyAsync($"{Context.User.Mention} Your reaction has been added!");
         }
     }
