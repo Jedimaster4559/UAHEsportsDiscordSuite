@@ -10,7 +10,7 @@ namespace UAHEsportsDiscordSuite.UAHEsportsBot.Services
 {
     public static class MainEsportsRoles
     {
-        private static ulong messageId = 613933958899564563;
+        private static ulong messageId = 614068459353014303;
         private static IEmote studentEmote = Emote.Parse("<:discordimage:597786037367996417>");
         private static IEmote alumniEmote = new Emoji("👴");
         private static IEmote guestEmote = new Emoji("😎");
